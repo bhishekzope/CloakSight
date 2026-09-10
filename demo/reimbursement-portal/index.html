@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Enterprise Reimbursement Portal — Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="portal-container">
+    <header class="portal-header">
+      <div class="portal-logo">
+        <span class="portal-logo-icon">🏢</span>
+        <span class="portal-logo-name">ACME Corp — Reimbursement Portal</span>
+      </div>
+      <div class="portal-badge">DEMO SITE</div>
+    </header>
+
+    <main class="portal-main">
+      <h1 class="portal-title">Travel Reimbursement Request</h1>
+      <p class="portal-subtitle">
+        <!-- DEMO NOTE: This page is intentionally filled with PII for demonstration.
+             CloakSight should detect and redact all sensitive fields before sending context to AI. -->
+        Please fill in all fields to submit your travel expense claim.
+      </p>
+
+      <!-- Quick Action Toolbar for Evaluator / Hackathon Demo -->
+      <div class="demo-quick-bar">
+        <button type="button" id="btn-autofill-profile" class="btn-demo-action">
+          ⚡ Autofill Sample Employee Profile (PII)
+        </button>
+        <button type="button" id="btn-autofill-trip" class="btn-demo-action secondary">
+          🏨 Fill Jalgaon Trip Claim (Hotel INR 4,500)
+        </button>
+        <span class="demo-tag">SIH 26171 Test Portal</span>
+      </div>
+
+      <form id="reimbursement-form" class="portal-form" novalidate>
+
+        <!-- ======================================
+             SECTION 1: Employee Information
+             Contains: PERSON_NAME, EMPLOYEE_ID, EMAIL, PHONE
+             ====================================== -->
+        <section class="form-section">
+          <h2 class="section-title">Employee Information</h2>
+
+          <div class="form-group">
+            <label for="employee-name">Full Name <span class="required">*</span></label>
+            <input
+              type="text"
+              id="employee-name"
+              name="employee_name"
+              placeholder="e.g. Rahul Sharma"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="employee-id">Employee ID <span class="required">*</span></label>
+            <input
+              type="text"
+              id="employee-id"
+              name="employee_id"
+              placeholder="e.g. EMP-2024-0042"
+              required
+            />
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="rahul@company.com"
+                autocomplete="email"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                placeholder="+91 98765 43210"
+                autocomplete="tel"
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================
+             SECTION 2: Banking Details
+             Contains: BANK_ACCOUNT, IFSC_CODE
+             ====================================== -->
+        <section class="form-section">
+          <h2 class="section-title">Reimbursement Account</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bank-account">Bank Account Number <span class="required">*</span></label>
+              <input
+                type="text"
+                id="bank-account"
+                name="bank_account"
+                placeholder="e.g. 00112345678901"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="ifsc-code">IFSC Code <span class="required">*</span></label>
+              <input
+                type="text"
+                id="ifsc-code"
+                name="ifsc_code"
+                placeholder="e.g. HDFC0001234"
+                required
+              />
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================
+             SECTION 3: Travel Details
+             Contains: travel date, category, amount
+             ====================================== -->
+        <section class="form-section">
+          <h2 class="section-title">Travel Details</h2>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="travel-date">Travel Date <span class="required">*</span></label>
+              <input
+                type="date"
+                id="travel-date"
+                name="travel_date"
+                required
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="expense-category">Expense Category <span class="required">*</span></label>
+              <select id="expense-category" name="expense_category" required>
+                <option value="">Select category</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Flight">Flight</option>
+                <option value="Train">Train</option>
+                <option value="Cab">Cab / Taxi</option>
+                <option value="Meals">Meals</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Amount (INR) <span class="required">*</span></label>
+            <input
+              type="number"
+              id="amount"
+              name="amount"
+              placeholder="e.g. 5000"
+              min="1"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              rows="3"
+              placeholder="Brief description of the expense..."
+            ></textarea>
+          </div>
+        </section>
+
+        <!-- ======================================
+             SECTION 4: Receipt Upload
+             Contains: receipt image (visual PII — handled by OCR in Phase 4)
+             ====================================== -->
+        <section class="form-section">
+          <h2 class="section-title">Receipt</h2>
+
+          <div class="form-group">
+            <label for="receipt-upload">Upload Receipt <span class="required">*</span></label>
+            <input
+              type="file"
+              id="receipt-upload"
+              name="receipt"
+              accept="image/*,application/pdf"
+            />
+            <span class="field-hint">Supported: JPG, PNG, PDF (max 10MB)</span>
+
+            <!-- Sample Receipt Card for OCR / Visual Perception Demo -->
+            <div class="sample-receipt-card" id="sample-receipt-card">
+              <div class="receipt-header">
+                <span class="receipt-icon">🧾</span>
+                <strong>Hotel Grand Palace — Jalgaon (Receipt #JAL-2026-88)</strong>
+              </div>
+              <div class="receipt-details">
+                <span>Date: 12-Sep-2026</span>
+                <span>Room #304 (2 Nights)</span>
+                <span class="receipt-total">TOTAL: INR 4,500.00</span>
+              </div>
+              <div class="receipt-tag">Verified by CloakSight Local OCR</div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ======================================
+             Submit
+             ====================================== -->
+        <div class="form-actions">
+          <button type="submit" id="btn-submit" class="btn-submit">
+            Submit Reimbursement
+          </button>
+          <button type="reset" id="btn-reset" class="btn-reset">
+            Reset
+          </button>
+        </div>
+
+      </form>
+
+      <!-- CloakSight Post-Submission Privacy Audit Card -->
+      <div id="submission-card" class="submission-card" style="display: none;">
+        <div class="submission-card-header">
+          <span class="success-icon">🎉</span>
+          <h2>Reimbursement Claim Submitted Successfully!</h2>
+        </div>
+        <p class="submission-meta">Reference: <strong id="claim-ref-id">ACME-CLM-88219</strong> | Status: <strong>Pending Approval</strong></p>
+
+        <div class="submission-summary">
+          <div class="summary-item">
+            <span class="summary-label">Category:</span>
+            <strong id="summary-category">—</strong>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Amount:</span>
+            <strong id="summary-amount">—</strong>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Travel Date:</span>
+            <strong id="summary-date">—</strong>
+          </div>
+          <div class="summary-item">
+            <span class="summary-label">Employee ID:</span>
+            <strong id="summary-emp-id">—</strong>
+          </div>
+        </div>
+
+        <div class="privacy-proof-banner">
+          <div class="shield-badge">🛡️ CloakSight Privacy Guard Verified</div>
+          <ul class="privacy-bullet-list">
+            <li>✅ <strong>6 Sensitive PII Fields</strong> were protected strictly inside on-device RAM (Name, Email, Phone, Aadhaar, Bank Details, IFSC).</li>
+            <li>✅ <strong>0 Bytes</strong> of sensitive personal identity data reached the external AI model.</li>
+            <li>✅ <strong>100% On-Device Re-hydration</strong>: Form filled autonomously without cloud surveillance.</li>
+          </ul>
+        </div>
+
+        <button type="button" id="btn-new-claim" class="btn-new-claim">
+          Submit Another Expense Claim
+        </button>
+      </div>
+    </main>
+
+    <footer class="portal-footer">
+      <p>ACME Corp Internal Portal — Demo only — Not real data</p>
+    </footer>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

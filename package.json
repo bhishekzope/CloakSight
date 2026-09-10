@@ -1,0 +1,48 @@
+{
+  "name": "cloaksight",
+  "version": "0.1.0",
+  "description": "On-device Visual Perception for Lightweight Browser Agents — SIH 26171",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:extension": "node scripts/build-extension.js",
+    "watch:extension": "node scripts/build-extension.js --watch",
+    "dev": "ts-node scripts/dev.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint extension/src --ext .ts",
+    "format": "prettier --write \"extension/src/**/*.ts\""
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/node": "^20.14.0",
+    "@typescript-eslint/eslint-plugin": "^7.0.0",
+    "@typescript-eslint/parser": "^7.0.0",
+    "@vitest/coverage-v8": "^1.6.0",
+    "esbuild": "^0.21.0",
+    "eslint": "^8.57.0",
+    "jsdom": "^24.1.0",
+    "@types/jsdom": "^21.1.7",
+    "playwright": "^1.44.0",
+    "prettier": "^3.3.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.0",
+    "vitest": "^1.6.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "author": "Team CloakSight — SIH 2026",
+  "license": "MIT",
+  "keywords": [
+    "browser-extension",
+    "privacy",
+    "pii",
+    "on-device-ml",
+    "browser-agent",
+    "sih2026"
+  ]
+}

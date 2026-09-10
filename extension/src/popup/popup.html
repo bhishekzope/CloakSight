@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self'; style-src 'self'; object-src 'none';" />
+  <title>CloakSight</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="cs-popup">
+    <!-- Header -->
+    <header class="cs-header">
+      <div class="cs-logo">
+        <span class="cs-logo-icon">🛡️</span>
+        <span class="cs-logo-text">CloakSight</span>
+      </div>
+      <div class="cs-status-indicator" id="status-indicator" aria-label="Status: Idle">
+        <span class="cs-status-dot cs-status-idle"></span>
+        <span class="cs-status-label" id="status-label">Idle</span>
+      </div>
+    </header>
+
+    <!-- Task Input -->
+    <section class="cs-task-section">
+      <label for="task-input" class="cs-label">What do you want to do?</label>
+      <textarea
+        id="task-input"
+        class="cs-textarea"
+        placeholder="e.g. Submit my hotel reimbursement for this trip."
+        rows="3"
+        aria-label="Task description"
+      ></textarea>
+    </section>
+
+    <!-- Privacy Status -->
+    <section class="cs-privacy-section" id="privacy-status" aria-live="polite">
+      <div class="cs-privacy-row">
+        <span class="cs-privacy-label">Privacy Guard</span>
+        <span class="cs-privacy-value" id="privacy-guard-status">—</span>
+      </div>
+      <div class="cs-privacy-row">
+        <span class="cs-privacy-label">Entities Redacted</span>
+        <span class="cs-privacy-value" id="entities-redacted">—</span>
+      </div>
+      <div class="cs-privacy-row">
+        <span class="cs-privacy-label">Context Reduction</span>
+        <span class="cs-privacy-value" id="context-reduction">—</span>
+      </div>
+    </section>
+
+    <!-- Action Buttons -->
+    <section class="cs-actions">
+      <button id="btn-activate" class="cs-btn cs-btn-primary" aria-label="Activate CloakSight">
+        Activate
+      </button>
+      <button id="btn-stop" class="cs-btn cs-btn-secondary" disabled aria-label="Stop CloakSight">
+        Stop
+      </button>
+    </section>
+
+    <!-- Footer -->
+    <footer class="cs-footer">
+      <span class="cs-version">v0.15.0</span>
+      <span class="cs-phase-badge">Phase 15 — Live Demo</span>
+    </footer>
+  </div>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,227 @@
+/* CloakSight Popup Styles */
+
+:root {
+  --cs-bg: #0f1117;
+  --cs-surface: #1a1d27;
+  --cs-border: #2a2d3e;
+  --cs-accent: #6c63ff;
+  --cs-accent-glow: rgba(108, 99, 255, 0.25);
+  --cs-text: #e8e8f0;
+  --cs-text-muted: #7a7a9a;
+  --cs-success: #22d3a0;
+  --cs-warning: #f59e0b;
+  --cs-danger: #ef4444;
+  --cs-idle: #7a7a9a;
+  --cs-radius: 8px;
+  --cs-font: "Inter", system-ui, -apple-system, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--cs-font);
+  background: var(--cs-bg);
+  color: var(--cs-text);
+  width: 340px;
+  min-height: 280px;
+  overflow: hidden;
+}
+
+/* ---- Popup Container ---- */
+.cs-popup {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+}
+
+/* ---- Header ---- */
+.cs-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.cs-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-logo-icon {
+  font-size: 20px;
+}
+
+.cs-logo-text {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  background: linear-gradient(135deg, #6c63ff, #a78bfa);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cs-status-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: var(--cs-text-muted);
+}
+
+.cs-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cs-idle);
+  transition: background 0.3s ease;
+}
+
+.cs-status-dot.cs-status-idle { background: var(--cs-idle); }
+.cs-status-dot.cs-status-active { background: var(--cs-accent); animation: pulse 1.5s infinite; }
+.cs-status-dot.cs-status-success { background: var(--cs-success); }
+.cs-status-dot.cs-status-error { background: var(--cs-danger); }
+.cs-status-dot.cs-status-blocked { background: var(--cs-warning); }
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* ---- Task Section ---- */
+.cs-task-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cs-label {
+  font-size: 12px;
+  color: var(--cs-text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.cs-textarea {
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  color: var(--cs-text);
+  font-family: var(--cs-font);
+  font-size: 13px;
+  padding: 10px 12px;
+  resize: none;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  line-height: 1.5;
+}
+
+.cs-textarea:focus {
+  border-color: var(--cs-accent);
+  box-shadow: 0 0 0 3px var(--cs-accent-glow);
+}
+
+.cs-textarea::placeholder {
+  color: var(--cs-text-muted);
+}
+
+/* ---- Privacy Status ---- */
+.cs-privacy-section {
+  background: var(--cs-surface);
+  border: 1px solid var(--cs-border);
+  border-radius: var(--cs-radius);
+  padding: 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cs-privacy-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.cs-privacy-label {
+  font-size: 11px;
+  color: var(--cs-text-muted);
+}
+
+.cs-privacy-value {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--cs-text);
+}
+
+/* ---- Action Buttons ---- */
+.cs-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.cs-btn {
+  flex: 1;
+  padding: 9px 14px;
+  border-radius: var(--cs-radius);
+  border: none;
+  font-family: var(--cs-font);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cs-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.cs-btn-primary {
+  background: var(--cs-accent);
+  color: #fff;
+}
+
+.cs-btn-primary:hover:not(:disabled) {
+  background: #7c73ff;
+  box-shadow: 0 0 12px var(--cs-accent-glow);
+}
+
+.cs-btn-secondary {
+  background: var(--cs-surface);
+  color: var(--cs-text-muted);
+  border: 1px solid var(--cs-border);
+}
+
+.cs-btn-secondary:hover:not(:disabled) {
+  color: var(--cs-text);
+  border-color: var(--cs-text-muted);
+}
+
+/* ---- Footer ---- */
+.cs-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 4px;
+  border-top: 1px solid var(--cs-border);
+}
+
+.cs-version {
+  font-size: 10px;
+  color: var(--cs-text-muted);
+}
+
+.cs-phase-badge {
+  font-size: 10px;
+  padding: 2px 8px;
+  border-radius: 20px;
+  background: rgba(108, 99, 255, 0.15);
+  color: var(--cs-accent);
+  font-weight: 600;
+}
